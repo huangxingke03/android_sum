@@ -11,7 +11,7 @@ import com.example.common.content.PagePath
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_function_main)
         findViewById<Button>(R.id.weather_bt).setOnClickListener {
             ARouter.getInstance().build(PagePath.ModuleFunctionPage.WEATHER_PAGE)
         }

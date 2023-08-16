@@ -38,9 +38,9 @@ android {
     sourceSets {
         main {
             if (isModuleDebug.toBoolean()) {
-                manifest.srcFile '/src/main/manifest/AndroidManifest.xml'
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             }else {
-                manifest.srcFile '/src/main/AndroidManifest.xml'
+                manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }
     }
