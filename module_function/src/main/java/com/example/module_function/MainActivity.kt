@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
+import com.example.common.ARouterUtils
 import com.example.common.content.PagePath
+import com.example.common.content.PagePath.ModuleFunctionPage.WEATHER_PAGE
 
 @Route(path = PagePath.ModuleFunctionPage.MAIN_PAGE)
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_function_main)
         findViewById<Button>(R.id.weather_bt).setOnClickListener {
-            ARouter.getInstance().build(PagePath.ModuleFunctionPage.WEATHER_PAGE)
+            ARouterUtils.navigationPage(WEATHER_PAGE)
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.module_function.net
 
 import com.example.module_function.weather.data.WeatherInfo
 import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,7 +16,13 @@ interface SearchWeather {
 
     @GET("v3/weather/weatherInfo")
     fun searchWeather1(
-        @Query("key") key: String ,
+        @Query("key") key: String,
         @Query("city") city: String
     ): Observable<WeatherInfo>
+
+    @GET("v3/weather/weatherInfo")
+    fun searchWeather2(
+        @Query("key") key: String,
+        @Query("city") city: String
+    ): Flow<WeatherInfo>
 }
