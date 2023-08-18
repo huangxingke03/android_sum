@@ -19,6 +19,6 @@ class WelcomeActivity : ARouterActivity() {
         setContentView(R.layout.activity_welcome)
         HandlerUtils.mainHandler().postDelayed({
             ARouter.getInstance().build(PagePath.ModuleMainPage.HOME_PAGE).navigation()
-        }, 3 * 1000)
+        }, 2 * 1000)
     }
 }
