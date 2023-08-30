@@ -4,13 +4,18 @@ import android.os.*
 import android.util.ArraySet
 import android.widget.Button
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.common.HandlerUtils
 import com.example.common.JsonUtils
 import com.example.common.LogUtils
 import com.example.common.content.PagePath
-import com.example.common.ui.ARouterActivity
+import com.example.common.ui.base.ARouterActivity
 import com.example.module_home.R
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.Hashtable
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
@@ -54,26 +59,35 @@ class HomeActivity : ARouterActivity() {
     var arrayBlockingQueue = ArrayBlockingQueue<String>(5)
     var time = 10
     var url1 = "http://pic1.win4000.com/wallpaper/c/58f8211a3a604.jpg"
+    var liveData = MutableLiveData<String>()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        liveData.observe(this) { string ->
+            LogUtils.d("--------liveData-----$string")
+        }
         initContainer()
 //        val imageview1 = findViewById<ImageView>(R.id.imageview1)
 //        Glide.with(this).load(url1).into(imageview1)
         findViewById<Button>(R.id.button1).setOnClickListener {
 //            buttonClick()
-            ARouter.getInstance().build(PagePath.ModuleKotlinPage.FUNCTION_PAGE).navigation()
+            ARouter.getInstance().build(PagePath.ModuleCommonPage.H5_PAGE).navigation()
+//            liveData.postValue("10")
+//            startActivity()
+
         }
         findViewById<Button>(R.id.button2).setOnClickListener {
 //            button2Click()
-            ARouter.getInstance().build(PagePath.ModuleKotlinPage.TEST_PAGE).navigation()
+//            ARouter.getInstance().build(PagePath.ModuleKotlinPage.TEST_PAGE).navigation()
+            liveData.postValue("20")
         }
         findViewById<Button>(R.id.button3).setOnClickListener {
 //            ARouter.getInstance().build(PagePath.ModuleKotlinPage.MAIN_PAGE).navigation()
 //            button3Click()
             ARouter.getInstance().build(PagePath.ModuleKotlinPage.MAIN_PAGE).navigation()
+            liveData.value="30"
         }
         findViewById<Button>(R.id.button4).setOnClickListener {
 //            button4Click()
@@ -81,6 +95,7 @@ class HomeActivity : ARouterActivity() {
             linkHashMapAccessOrderFalse.get("linkHashMapAccessOrderFalseKey3")
 
         }
+//        lifecycle.addObserver()
     }
 
     private fun button4Click() {
@@ -108,16 +123,23 @@ class HomeActivity : ARouterActivity() {
     }
 
     private fun button2Click() {
-        linkList.add("linkList条目1")
-        linkList.add("linkList条目2")
-        linkList.add("linkList条目3")
-        linkList.add("linkList条目4")
-        linkList.remove("linkList条目2")
-        linkList[2]
-        hashMap.put("hashMapKey1", "hashMapValue111111111111111111")
-        if (linkList.contains("linkList-00000条目"))
-            LogUtils.d("linkList包含linkList-00条目")
-        LogUtils.d("---------button2--------")
+//        linkList.add("linkList条目1")
+//        linkList.add("linkList条目2")
+//        linkList.add("linkList条目3")
+//        linkList.add("linkList条目4")
+//        linkList.remove("linkList条目2")
+//        linkList[2]
+//        hashMap.put("hashMapKey1", "hashMapValue111111111111111111")
+//        if (linkList.contains("linkList-00000条目"))
+//            LogUtils.d("linkList包含linkList-00条目")
+//        LogUtils.d("---------button2--------")
+        Thread() {
+            Looper.prepare()
+            HandlerUtils.handler(Looper.myLooper()!!).post {
+                LogUtils.d("---222222222---${Thread.currentThread().name}")
+            }
+            Looper.loop()
+        }.start()
     }
 
     private fun buttonClick() {
@@ -150,12 +172,24 @@ class HomeActivity : ARouterActivity() {
 //        linkHashMapAccessOrderFalse.get("linkHashMapAccessOrderFalseKey2")
 //        LogUtils.d(JsonUtils.toJsonStringGson(hashMap))
 //        arrayBlockingQueue.put("arrayBlockingQueue---item---0000")
-        val iterator = linkHashMapAccessOrderFalse.entries.iterator()
-        while (iterator.hasNext()) {
-            LogUtils.d("----------${iterator.next()}")
+//        val iterator = linkHashMapAccessOrderFalse.entries.iterator()
+//        while (iterator.hasNext()) {
+//            LogUtils.d("----------${iterator.next()}")
+//        }
+//        LogUtils.d(linkHashMapAccessOrderFalse)
+//        HandlerUtils.mainHandler().post {
+//            LogUtils.d("---11111111---${Thread.currentThread().name}")
+//        }
+        Observable.create { emitter ->
+            emitter.onNext("1");
+            emitter.onComplete()
+            LogUtils.d("---发射数据-------${Thread.currentThread().name}")
         }
-        LogUtils.d(linkHashMapAccessOrderFalse)
-
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { string ->
+                LogUtils.d("---收到---$string----${Thread.currentThread().name}")
+            }
     }
 
     private fun initContainer() {

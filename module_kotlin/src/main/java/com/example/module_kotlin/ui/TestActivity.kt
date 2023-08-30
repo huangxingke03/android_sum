@@ -5,7 +5,7 @@ import android.widget.Button
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.common.content.PagePath
-import com.example.common.ui.ARouterActivity
+import com.example.common.ui.base.ARouterActivity
 import com.example.module_kotlin.R
 
 @Route(path = PagePath.ModuleKotlinPage.TEST_PAGE)
