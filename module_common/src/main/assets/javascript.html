@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carson_Ho</title>
+    <script>
+   function callJS1(){
+    return "js返回数据---Android调用了JS的callJS1方法";
+   }
+   function callJS2(){
+    alert("js不返回数据---Android调用了JS的callJS2方法");
+   }
+   function callAndroid(){
+     test.hello("js调用了android中的hello方法");
+   }
+    </script>
+</head>
+<body>
+<button type="button" id="button1" onclick="callAndroid()">JS按钮</button>
+</body>
+</html>

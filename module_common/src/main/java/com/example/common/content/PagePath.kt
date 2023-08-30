@@ -22,6 +22,7 @@ object PagePath {
 
     object ModuleCommonPage {
         const val TEST_PAGE = "/common/module/test/page"
+        const val H5_PAGE = "/common/module/h5/page"
     }
 
     object ModuleMainPage {
