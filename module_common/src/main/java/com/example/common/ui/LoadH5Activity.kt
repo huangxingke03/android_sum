@@ -38,8 +38,8 @@ class LoadH5Activity : ARouterActivity() {
                 request: WebResourceRequest?
             ): Boolean {
 
-                val url = request?.url
-
+                val uri = request?.url
+                LogUtils.d("---------shouldOverrideUrlLoading---${uri?.scheme}--${uri?.authority}--")
                 return true
             }
 
