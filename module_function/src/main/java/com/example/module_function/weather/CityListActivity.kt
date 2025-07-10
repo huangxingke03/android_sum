@@ -53,13 +53,13 @@ class CityListActivity : ARouterActivity() {
 //                        else -> "210100"
 //                    }
 //                )
-            weatherViewModel.searchWeather(when (position) {
-                0 -> "110000"
-                1 -> "310000"
-                2 -> "440100"
-                3 -> "440300"
-                else -> "210100"
-            })
+//            weatherViewModel.searchWeather(when (position) {
+//                0 -> "110000"
+//                1 -> "310000"
+//                2 -> "440100"
+//                3 -> "440300"
+//                else -> "210100"
+//            })
 //            searchWeather.subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(object : Observer<WeatherInfo> {

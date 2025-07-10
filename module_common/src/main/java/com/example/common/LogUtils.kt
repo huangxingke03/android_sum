@@ -28,9 +28,15 @@ object LogUtils {
         Logger.d(content)
     }
 
+    @JvmStatic
+    fun d(content: String) {
+        Logger.d(content)
+    }
+
     fun d(message: String, vararg args: Any) {
         Logger.d(message, * args)
     }
+
     fun d(arrayList: ArrayList<Any>) {
         Logger.d(arrayList)
     }

@@ -1,8 +1,17 @@
 package com.example.module_home.ui
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.os.*
 import android.util.ArraySet
+import android.util.Log
+import android.view.MotionEvent
 import android.widget.Button
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -10,17 +19,17 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.example.common.HandlerUtils
 import com.example.common.JsonUtils
 import com.example.common.LogUtils
+import com.example.common.StorageUtils1
 import com.example.common.content.PagePath
 import com.example.common.ui.base.ARouterActivity
 import com.example.module_home.R
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.Hashtable
-import java.util.LinkedHashMap
-import java.util.LinkedHashSet
-import java.util.LinkedList
-import java.util.TreeMap
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.LinkedBlockingDeque
@@ -54,6 +63,7 @@ class HomeActivity : ARouterActivity() {
     var array1 = intArrayOf(1, 2, 3, 4, 5, 6)
 
     var array2 = intArrayOf(11, 12, 13, 14)
+    var a = Math.random().toInt()
 
     var linkBlockQune = LinkedBlockingDeque<String>()
     var arrayBlockingQueue = ArrayBlockingQueue<String>(5)
@@ -66,36 +76,114 @@ class HomeActivity : ARouterActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         liveData.observe(this) { string ->
-            LogUtils.d("--------liveData-----$string")
+//            LogUtils.d("--------liveData-----$string")
         }
+
         initContainer()
 //        val imageview1 = findViewById<ImageView>(R.id.imageview1)
 //        Glide.with(this).load(url1).into(imageview1)
         findViewById<Button>(R.id.button1).setOnClickListener {
 //            buttonClick()
-            ARouter.getInstance().build(PagePath.ModuleCommonPage.H5_PAGE).navigation()
+//            ARouter.getInstance().build(PagePath.ModuleCommonPage.H5_PAGE).navigation()
 //            liveData.postValue("10")
 //            startActivity()
+//            registerReceiver(MyBroadCastReceiver(), IntentFilter("test.broadcast.one"))
+            LogUtils.d("--------11111111111-----")
+            var newPath =
+                filesDir.absolutePath + File.separator.toString() + "/button1/newPath//$a/"
+            Thread() {
+                while (true) {
+                    copyAssetsDir2Phone(this@HomeActivity, "test/Blog", a++, newPath)
+                }
+
+            }.start()
+            val configPath = filesDir.absolutePath + "/face/configure"
+
 
         }
         findViewById<Button>(R.id.button2).setOnClickListener {
 //            button2Click()
 //            ARouter.getInstance().build(PagePath.ModuleKotlinPage.TEST_PAGE).navigation()
-            liveData.postValue("20")
+//            liveData.postValue("20")
+//            Thread(){
+//            sendBroadcast(Intent().apply {
+//                action="test.broadcast.one"
+//            })
+//            LogUtils.d("-------------发广播----${Thread.currentThread().name}-")
+//
+//            }.start()
+            var newPath =
+                filesDir.absolutePath + File.separator.toString() + "/button2/newPath/$a/"
+            Thread() {
+                while (true) {
+                    copyAssetsDir2Phone(this@HomeActivity, "test/Blog", a++, newPath)
+                }
+
+            }.start()
         }
         findViewById<Button>(R.id.button3).setOnClickListener {
-//            ARouter.getInstance().build(PagePath.ModuleKotlinPage.MAIN_PAGE).navigation()
 //            button3Click()
-            ARouter.getInstance().build(PagePath.ModuleKotlinPage.MAIN_PAGE).navigation()
-            liveData.value="30"
+//            ARouter.getInstance().build(PagePath.ModuleKotlinPage.MAIN_PAGE).navigation()
+//            liveData.value="30"
+            var newPath =
+                filesDir.absolutePath + File.separator.toString() + "/button3/newPath/$a/"
+            Thread() {
+
+                while (true) {
+                    copyAssetsDir2Phone(this@HomeActivity, "test/Blog", a++, newPath)
+                }
+
+            }.start()
         }
         findViewById<Button>(R.id.button4).setOnClickListener {
-//            button4Click()
-//            ARouter.getInstance().build(PagePath.module_common_test_page).navigation()
-            linkHashMapAccessOrderFalse.get("linkHashMapAccessOrderFalseKey3")
+
+            var newPath =
+                filesDir.absolutePath + File.separator.toString() + "/button4/newPath/$a/"
+            Thread() {
+
+                while (true) {
+                    copyAssetsDir2Phone(this@HomeActivity, "test/Blog", a--, newPath)
+                }
+
+            }.start()
+
+        }
+        val text1 = findViewById<TextView>(R.id.text1)
+        findViewById<Button>(R.id.button5).setOnClickListener {
+            text1.text = StorageUtils1.queryStorage()
 
         }
 //        lifecycle.addObserver()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        var newPath =
+            filesDir.absolutePath + File.separator.toString() + "/onsTop1/newPath/"
+        Thread() {
+            var a = 5
+            while (true) {
+                copyAssetsDir2Phone(this@HomeActivity, "test/Blog", a++, newPath)
+            }
+
+        }.start()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        LogUtils.d("----------activity------dispatchTouchEvent-------")
+        return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        LogUtils.d("----------activity------onTouchEvent-------")
+        return super.onTouchEvent(event)
+    }
+
+    inner class MyBroadCastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Thread.sleep(40 * 1000)
+            LogUtils.d("---------MyBroadCastReceiver----onReceive----${Thread.currentThread().name}-")
+        }
     }
 
     private fun button4Click() {
@@ -142,6 +230,76 @@ class HomeActivity : ARouterActivity() {
         }.start()
     }
 
+    fun copyAssetsDir2Phone(activity: Activity, filePath: String, a: Int, filePath1: String) {
+        var filePath = filePath
+        try {
+            val fileList = activity.getAssets().list(filePath)
+            if (fileList != null) {
+                if (fileList.size > 0) { //如果是目录
+                    val file = File(
+                        filePath1
+                    )
+                    file.mkdirs() //如果文件夹不存在，则递归
+                    if (fileList != null) {
+                        for (fileName in fileList) {
+                            copyAssetsDir2Phone(
+                                activity,
+                                "$filePath/$fileName",
+                                a,
+                                "$filePath1/$a$fileName"
+                            )
+                        }
+                    }
+                } else { //如果是文件
+                    val inputStream = activity.assets.open(filePath)
+                    val file = File(
+                        filePath1
+                    )
+                    LogUtils.d("copyAssets2Phone-----file:$file")
+                    val fos = FileOutputStream(file)
+                    var len = -1
+                    val buffer = ByteArray(1024)
+                    while (inputStream.read(buffer).also { len = it } != -1) {
+                        fos.write(buffer, 0, len)
+                    }
+                    fos.flush()
+                    inputStream.close()
+                    fos.close()
+                    LogUtils.d("------复制完毕------")
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            LogUtils.d("------失败----${e.message}--")
+        }
+    }
+
+
+    fun copyAssetsFile2Phone(activity: Activity, fileName: String) {
+        try {
+            val inputStream = activity.getAssets().open(fileName)
+            //getFilesDir() 获得当前APP的安装路径 /data/data/包名/files 目录
+            val file = File(
+                activity.getFilesDir().getAbsolutePath() + File.separator.toString() + fileName
+            )
+            if (!file.exists() || file.length() === 0L) {
+                val fos = FileOutputStream(file) //如果文件不存在，FileOutputStream会自动创建文件
+                var len = -1
+                val buffer = ByteArray(1024)
+                while (inputStream.read(buffer).also { len = it } != -1) {
+                    fos.write(buffer, 0, len)
+                }
+                fos.flush() //刷新缓存区
+                inputStream.close()
+                fos.close()
+            } else {
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    @SuppressLint("CheckResult")
     private fun buttonClick() {
 //        LogUtils.d(JsonUtils.toJsonStringGson(array1))
 //        System.arraycopy(array1, 0, array2, 3, 4)
@@ -244,4 +402,6 @@ class HomeActivity : ARouterActivity() {
         hashSet.add("hashSet-01条目")
         hashSet.add("hashSet-02条目")
     }
+
+
 }

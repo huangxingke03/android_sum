@@ -31,8 +31,35 @@
         android:layout_height="wrap_content"
         android:text="button4" />
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="button5" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="1gb" />
+
     <ImageView
         android:id="@+id/imageview1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
+
+    <com.example.module_home.ui.view.MyViewGroup
+        android:id="@+id/myViewGroup"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@android:color/black">
+
+        <com.example.module_home.ui.view.MyView
+            android:id="@+id/myView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@android:color/holo_red_dark" />
+    </com.example.module_home.ui.view.MyViewGroup>
 </LinearLayout>

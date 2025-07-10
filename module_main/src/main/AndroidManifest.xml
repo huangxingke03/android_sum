@@ -22,6 +22,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+<!--        <provider-->
+<!--            android:authorities=""-->
+<!--            android:name=""-->
     </application>
 
 </manifest>
