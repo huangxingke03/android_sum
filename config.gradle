@@ -17,5 +17,14 @@ ext {
                arouterCompiler              : 'com.alibaba:arouter-compiler:1.5.2',
                rxpermissions                : 'com.github.tbruyelle:rxpermissions:0.12',
     ]
+    sdkConfig = [
+            compileSdk: 35,
+            targetSdk : 35,
+            minSdk    : 21,
+    ]
+    versionConfig = [
+            versionCode: 1,
+            versionName: '1.0版本'
+    ]
 
 }
