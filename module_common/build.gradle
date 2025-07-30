@@ -68,5 +68,5 @@ dependencies {
     implementation rootProject.ext.library.arouterApi
     kapt rootProject.ext.library.arouterCompiler
     //权限
-    api rootProject.ext.library.rxpermissions
+//    api rootProject.ext.library.rxpermissions
 }
