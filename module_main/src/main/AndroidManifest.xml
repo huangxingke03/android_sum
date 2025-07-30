@@ -3,14 +3,18 @@
 
     <application>
         <activity
+            android:name=".ui.flow.FlowActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.WelcomeActivity"
-            android:theme="@style/WelcomeTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -22,9 +26,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-<!--        <provider-->
-<!--            android:authorities=""-->
-<!--            android:name=""-->
     </application>
 
 </manifest>

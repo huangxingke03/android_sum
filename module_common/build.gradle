@@ -53,7 +53,7 @@ dependencies {
     api rootProject.ext.library.converterGson
     api rootProject.ext.library.logInterceptor
     api rootProject.ext.library.rxandroid
-    api rootProject.ext.library.rxJava3
+//    api rootProject.ext.library.rxJava3
     api rootProject.ext.library.adapterRxjava3
     //适配器
     api rootProject.ext.library.baseRecyclerViewAdapterHelper

@@ -28,5 +28,6 @@ object PagePath {
     object ModuleMainPage {
         const val WELCOME_PAGE = "/main/module/welcome/page"
         const val HOME_PAGE = "/main/module/home/page"
+        const val FLOW_PAGE = "/main/module/flow/page"
     }
 }
