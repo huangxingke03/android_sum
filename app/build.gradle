@@ -15,7 +15,6 @@ android {
         versionCode rootProject.ext.versionConfig.versionCode
         versionName rootProject.ext.versionConfig.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        buildConfigField "boolean", "isModule", "$isModule"
     }
 
     buildTypes {
