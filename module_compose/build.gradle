@@ -1,4 +1,4 @@
-if (isModuleDebug.toBoolean()) {
+if (debugMode.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -10,7 +10,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        if (isModuleDebug.toBoolean()) {
+        if (debugMode.toBoolean()) {
             applicationId "com.example.module_compose"
         }
         minSdk 21
@@ -50,7 +50,7 @@ android {
     }
     sourceSets {
         main {
-            if (isModuleDebug.toBoolean()) {
+            if (debugMode.toBoolean()) {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
