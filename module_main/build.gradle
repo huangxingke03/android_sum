@@ -7,17 +7,16 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 android {
     namespace 'com.example.module_home'
-    compileSdk 33
+    compileSdk rootProject.ext.sdkConfig.compileSdk
 
     defaultConfig {
         if (debugMode.toBoolean()) {
             applicationId "com.example.module_home"
         }
-        minSdk 21
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
-
+        minSdk rootProject.ext.sdkConfig.minSdk
+        targetSdk rootProject.ext.sdkConfig.targetSdk
+        versionCode rootProject.ext.versionConfig.versionCode
+        versionName rootProject.ext.versionConfig.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
