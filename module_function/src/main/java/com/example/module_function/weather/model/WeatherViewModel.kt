@@ -49,29 +49,29 @@ class WeatherViewModel : ViewModel() {
     }
 
     fun searchWeatherObservable(cityCode: String) {
-        val searchWeather =
-            searchWeather.searchWeather1("60914564e8cb7ca7b497530783a34882", cityCode)
-        searchWeather
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<WeatherInfo> {
-                override fun onSubscribe(d: Disposable?) {
-                    LogUtils.d("--------Observable---onSubscribe--")
-                }
-
-                override fun onNext(value: WeatherInfo?) {
-                    serachWeather.value = value
-                    LogUtils.d("--------Observable---onNext---$value")
-                }
-
-                override fun onError(e: Throwable?) {
-                    LogUtils.d("--------Observable---onError---${e?.message}")
-                }
-
-                override fun onComplete() {
-                    LogUtils.d("--------Observable---onComplete---")
-                }
-            })
+//        val searchWeather =
+//            searchWeather.searchWeather1("60914564e8cb7ca7b497530783a34882", cityCode)
+//        searchWeather
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(object : Observer<WeatherInfo> {
+//                override fun onSubscribe(d: Disposable?) {
+//                    LogUtils.d("--------Observable---onSubscribe--")
+//                }
+//
+//                override fun onNext(value: WeatherInfo?) {
+//                    serachWeather.value = value
+//                    LogUtils.d("--------Observable---onNext---$value")
+//                }
+//
+//                override fun onError(e: Throwable?) {
+//                    LogUtils.d("--------Observable---onError---${e?.message}")
+//                }
+//
+//                override fun onComplete() {
+//                    LogUtils.d("--------Observable---onComplete---")
+//                }
+//            })
     }
 
     fun searchWeatherCall(cityCode: String) {
