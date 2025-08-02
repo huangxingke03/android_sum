@@ -103,11 +103,14 @@ class HomeActivity : ARouterActivity() {
 //                what = 0
 //            }))
 
-
         }
         findViewById<Button>(R.id.button2).setOnClickListener {}
-        findViewById<Button>(R.id.button3).setOnClickListener {}
-        findViewById<Button>(R.id.button4).setOnClickListener {}
+        findViewById<Button>(R.id.button3).setOnClickListener {
+            ARouter.getInstance().build(PagePath.ModuleMainPage.FLOW_PAGE).navigation()
+        }
+        findViewById<Button>(R.id.button4).setOnClickListener {
+            ARouter.getInstance().build(PagePath.ModuleJavaPage.MAIN_PAGE).navigation()
+        }
 
         val text1 = findViewById<TextView>(R.id.text1)
         findViewById<Button>(R.id.button5).setOnClickListener {
@@ -120,6 +123,7 @@ class HomeActivity : ARouterActivity() {
         }
         findViewById<MyView>(R.id.myView).setOnClickListener {
 //            LogUtils.d("--------myView-----点击事件处理---")
+
         }
     }
 

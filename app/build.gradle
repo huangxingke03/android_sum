@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         buildConfig true
+        dataBinding true
     }
 }
 kapt {
@@ -58,7 +59,6 @@ dependencies {
     implementation project(path: ':module_kotlin')
     implementation project(path: ':module_java')
     implementation project(path: ':module_function')
-    implementation project(path: ':module_compose')
     implementation project(path: ':module_main')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
