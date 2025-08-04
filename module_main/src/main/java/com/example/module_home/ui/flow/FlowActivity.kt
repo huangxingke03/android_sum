@@ -16,8 +16,9 @@ import kotlinx.coroutines.flow.flow
 class FlowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val bind = DataBindingUtil.setContentView<ActivityFlowBinding>(this, R.layout.activity_flow)
-        bind.button1.setOnClickListener {
+        val flowBind =
+            DataBindingUtil.setContentView<ActivityFlowBinding>(this, R.layout.activity_flow)
+        flowBind.button1.setOnClickListener {
             LogUtils.d("FlowActivity  button1")
         }
     }

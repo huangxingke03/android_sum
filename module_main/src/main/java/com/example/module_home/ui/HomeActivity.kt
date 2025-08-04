@@ -13,6 +13,7 @@ import android.view.MotionEvent
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -25,6 +26,7 @@ import com.example.common.StorageUtils1
 import com.example.common.content.PagePath
 import com.example.common.ui.base.ARouterActivity
 import com.example.module_home.R
+import com.example.module_home.databinding.ActivityHomeBinding
 import com.example.module_home.ui.view.MyView
 import com.example.module_home.ui.view.MyViewGroup
 import com.example.module_home.ui.vm.TestViewModel
@@ -87,7 +89,8 @@ class HomeActivity : ARouterActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        var homeBind =
+            DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         model.setDataValue("....onCreate.....")
         model.data1.observe(this) { value ->
             LogUtils.d("---------value: $value")
@@ -95,7 +98,7 @@ class HomeActivity : ARouterActivity() {
 
 //        Glide.with(this).load()
         initContainer()
-        findViewById<Button>(R.id.button1).setOnClickListener {
+        homeBind.button1.setOnClickListener {
 //            LogUtils.d("-----------${JsonUtils.toJsonStringGson(hashMap)}---")
 //            hashMap.put("hashMapKey4", "new")
 //            LogUtils.d("-----------${JsonUtils.toJsonStringGson(hashMap)}---")
@@ -104,33 +107,27 @@ class HomeActivity : ARouterActivity() {
 //            }))
 
         }
-        findViewById<Button>(R.id.button2).setOnClickListener {}
-        findViewById<Button>(R.id.button3).setOnClickListener {
+        homeBind.button2.setOnClickListener {}
+        homeBind.button3.setOnClickListener {
             ARouter.getInstance().build(PagePath.ModuleMainPage.FLOW_PAGE).navigation()
         }
-        findViewById<Button>(R.id.button4).setOnClickListener {
+        homeBind.button4.setOnClickListener {
             ARouter.getInstance().build(PagePath.ModuleJavaPage.MAIN_PAGE).navigation()
         }
 
-        val text1 = findViewById<TextView>(R.id.text1)
-        findViewById<Button>(R.id.button5).setOnClickListener {
-            text1.text = StorageUtils1.queryStorage()
+        homeBind.button5.setOnClickListener {
+            homeBind.text1.text = StorageUtils1.queryStorage()
 
         }
 
-        findViewById<MyViewGroup>(R.id.myViewGroup).setOnClickListener {
+        homeBind.myViewGroup.setOnClickListener {
 //            LogUtils.d("--------myViewGroup-----点击事件处理---")
         }
-        findViewById<MyView>(R.id.myView).setOnClickListener {
+        homeBind.myView.setOnClickListener {
 //            LogUtils.d("--------myView-----点击事件处理---")
 
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         LogUtils.d(
