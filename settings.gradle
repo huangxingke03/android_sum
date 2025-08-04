@@ -17,7 +17,5 @@ dependencyResolutionManagement {
 rootProject.name = "andoid_sum"
 include ':app'
 include ':module_common'
-include ':module_kotlin'
-include ':module_java'
 include ':module_function'
 include ':module_main'
