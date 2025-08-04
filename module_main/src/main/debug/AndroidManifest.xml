@@ -22,10 +22,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".ui.WelcomeActivity"
-            android:theme="@style/WelcomeTheme" />
-        <activity android:name=".ui.HomeActivity"></activity>
     </application>
 
 </manifest>
