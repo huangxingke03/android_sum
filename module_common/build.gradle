@@ -46,6 +46,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //arouter
+    implementation rootProject.ext.library.arouterApi
+    kapt rootProject.ext.library.arouterCompiler
     //日志
     implementation rootProject.ext.library.logger
     //网络
@@ -53,20 +56,18 @@ dependencies {
     api rootProject.ext.library.converterGson
     api rootProject.ext.library.logInterceptor
     api rootProject.ext.library.rxandroid
-//    api rootProject.ext.library.rxJava3
     api rootProject.ext.library.adapterRxjava3
+    //compose
+    api rootProject.ext.library.lifecycleViewmodelCompose
+    api rootProject.ext.library.composeRuntimeLivedata
+    //ViewModel
+    implementation rootProject.ext.library.lifecycleViewmodel
+    implementation rootProject.ext.library.lifecycleRuntimeKtx
+    implementation rootProject.ext.library.lifecycleLiveData
     //适配器
     api rootProject.ext.library.baseRecyclerViewAdapterHelper
     //内存检测工具
     api rootProject.ext.library.leakcanary
     //图片
     api rootProject.ext.library.glide
-    //compose
-    api rootProject.ext.library.lifecycleViewmodelCompose
-    api rootProject.ext.library.runtimeLivedata
-    //arouter
-    implementation rootProject.ext.library.arouterApi
-    kapt rootProject.ext.library.arouterCompiler
-    //权限
-//    api rootProject.ext.library.rxpermissions
 }
