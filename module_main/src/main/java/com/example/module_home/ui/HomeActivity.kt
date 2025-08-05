@@ -93,7 +93,7 @@ class HomeActivity : ARouterActivity() {
             DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         model.setDataValue("....onCreate.....")
         model.data1.observe(this) { value ->
-            LogUtils.d("---------value: $value")
+            //LogUtils.d("---------value: $value")
         }
 
 //        Glide.with(this).load()
@@ -127,25 +127,6 @@ class HomeActivity : ARouterActivity() {
 //            LogUtils.d("--------myView-----点击事件处理---")
 
         }
-    }
-
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
-        LogUtils.d(
-            "----------activity------dispatchTouchEvent-------${
-                when (event?.action) {
-                    0 -> "--ACTION_DOWN事件--"
-                    1 -> "--ACTION_UP事件--"
-                    2 -> "--ACTION_MOVE事件--"
-                    else -> "--其他事件--"
-                }
-            }--"
-        )
-        return super.dispatchTouchEvent(event)
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        LogUtils.d("----------activity------onTouchEvent-------")
-        return super.onTouchEvent(event)
     }
 
     inner class MyBroadCastReceiver : BroadcastReceiver() {

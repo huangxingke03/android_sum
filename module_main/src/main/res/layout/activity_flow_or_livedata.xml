@@ -6,39 +6,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="45dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/flow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="flow1" />
+            android:text="flow" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/flow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="flow2" />
+            android:text="flowOf" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/flow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="flow3" />
+            android:text="asFlow" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/flow4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="flow4" />
+            android:text="callBackFlow" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/flow5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="flow5" />
+            android:text="channelFlow" />
 
         <TextView
             android:id="@+id/flow_text1"
