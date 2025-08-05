@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -21,10 +23,11 @@ class FlowViewModel : ViewModel() {
     val stateFlow = MutableStateFlow(String)
     val shareFlow = MutableSharedFlow<String>()
     var time = 0
+    var maxIndex = 5
 
     fun getFlow1(): Flow<Int> {
         return flow {
-            while (time < 10) {
+            while (time < 5) {
                 time++
                 emit(time)
             }
@@ -57,6 +60,43 @@ class FlowViewModel : ViewModel() {
             withContext(Dispatchers.IO) {
                 val currentIoThreadName = Thread.currentThread().name
                 send("切换线程后当前线程信息 : $currentIoThreadName")
+            }
+        }
+    }
+
+    fun getFlow6(): Flow<Int> {
+        return flow {
+            while (time < 5) {
+                time++
+                emit(time)
+                LogUtils.d("---getFlow6---emit--- :$time")
+            }
+        }
+    }
+
+    fun getFlow7(): Flow<String> {
+        return flow {
+            while (maxIndex >= 0) {
+                emit("list条目 <--> index:$maxIndex")
+                maxIndex--
+            }
+        }
+    }
+
+    fun getFlow8(): Flow<String> {
+        return flow {
+            while (maxIndex >= 0) {
+                emit("set条目 <--> index:$maxIndex")
+                maxIndex--
+            }
+        }
+    }
+
+    fun getFlow9(): Flow<String> {
+        return flow {
+            while (maxIndex >= 0) {
+                emit("collection条目 <--> index:$maxIndex")
+                maxIndex--
             }
         }
     }

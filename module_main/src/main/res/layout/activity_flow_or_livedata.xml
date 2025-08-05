@@ -40,6 +40,30 @@
             android:layout_height="wrap_content"
             android:text="channelFlow" />
 
+        <Button
+            android:id="@+id/flow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="collectLatest" />
+
+        <Button
+            android:id="@+id/flow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="flow toList" />
+
+        <Button
+            android:id="@+id/flow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="flow toSet" />
+
+        <Button
+            android:id="@+id/flow9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="flow toCollection" />
+
         <TextView
             android:id="@+id/flow_text1"
             android:layout_width="wrap_content"
