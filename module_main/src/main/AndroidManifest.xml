@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".ui.flow.FlowActivity"
+            android:name=".ui.FlowOrLiveDataActivity"
             android:exported="false" />
         <activity
             android:name=".ui.WelcomeActivity"
