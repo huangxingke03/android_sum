@@ -16,6 +16,9 @@ ext {
                arouterApi                   : 'com.alibaba:arouter-api:1.5.2',
                arouterCompiler              : 'com.alibaba:arouter-compiler:1.5.2',
                rxpermissions                : 'com.github.tbruyelle:rxpermissions:0.12',
+               lifecycleViewmodel           : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2',
+               lifecycleRuntimeKtx           : 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.2',
+               lifecycleLiveData           : 'androidx.lifecycle:lifecycle-livedata:2.9.2',
     ]
     sdkConfig = [
             compileSdk: 35,

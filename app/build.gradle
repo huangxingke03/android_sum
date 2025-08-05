@@ -64,4 +64,8 @@ dependencies {
     //arouter
     implementation rootProject.ext.library.arouterApi
     kapt rootProject.ext.library.arouterCompiler
+    //ViewModel
+    implementation rootProject.ext.library.lifecycleViewmodel
+    implementation rootProject.ext.library.lifecycleRuntimeKtx
+    implementation rootProject.ext.library.lifecycleLiveData
 }
