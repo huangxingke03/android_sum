@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.LogUtils
 import com.example.common.net.RetrofitManager
-import com.example.module_function.net.SearchWeather
-import com.example.module_function.net.flow.SearchWeatherApi
-import com.example.module_function.net.flow.SearchWeatherFlowImpl
+import com.example.common.weather.SearchWeather
 import com.example.common.weather.data.WeatherInfo
+import com.example.common.weather.flow.SearchWeatherApi
+import com.example.common.weather.flow.SearchWeatherFlowImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.getValue
 
 class WeatherViewModel : ViewModel() {
     var serachWeather = MutableLiveData<WeatherInfo>()
@@ -87,7 +88,7 @@ class WeatherViewModel : ViewModel() {
     }
 
     fun test() {
-        Observable.create(ObservableOnSubscribe<String> {emitter->
+        Observable.create(ObservableOnSubscribe<String> { emitter ->
             emitter.onNext("test1")
             emitter.onNext("test2")
             LogUtils.d("--------test----被观察者创建-----")
