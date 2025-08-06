@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 class FlowOrLiveDataActivity : AppCompatActivity() {
     var dataList = mutableListOf<String>()
     var dataSet = mutableSetOf<String>()
-    var dataCollection= mutableListOf<String>()
+    var dataCollection = mutableListOf<String>()
     val flowModel by lazy {
         ViewModelProvider(this).get(FlowViewModel::class.java)
     }
@@ -101,6 +101,65 @@ class FlowOrLiveDataActivity : AppCompatActivity() {
                 LogUtils.d("flow toCollection")
                 flowModel.getFlow9().toCollection(dataCollection)
                 LogUtils.d(dataCollection)
+            }
+        }
+        flowOrLiveDataBind.flow10.setOnClickListener {
+            flowModel.getStateFlow1()
+            lifecycleScope.launch {
+                flowModel.stateFlow1.collect { value ->
+                    LogUtils.d("stateflow collect  : $value")
+                }
+            }
+        }
+        flowOrLiveDataBind.flow11.setOnClickListener {
+            flowModel.getStateFlow2()
+            lifecycleScope.launch {
+                flowModel.stateFlow2.collect { list ->
+                    LogUtils.d("stateflowlist 111 flow11 collect  : $list")
+                }
+            }
+            lifecycleScope.launch {
+                flowModel.stateFlow2.collect { list ->
+                    LogUtils.d("stateflowlist 222 flow11 collect  : $list")
+                }
+            }
+        }
+        flowOrLiveDataBind.flow12.setOnClickListener {
+            lifecycleScope.launch {
+                flowModel.stateFlow2.collect { list ->
+                    LogUtils.d("stateflowlist flow12 collect  : $list")
+                }
+            }
+        }
+        flowOrLiveDataBind.flow13.setOnClickListener {
+            flowModel.updateShareFlow1()
+            lifecycleScope.launch {
+                flowModel._shareFlow.collect { value ->
+                    LogUtils.d("shareflow  collect1  : $value")
+                }
+            }
+        }
+        flowOrLiveDataBind.flow14.setOnClickListener {
+            flowModel.updateShareFlow2()
+            lifecycleScope.launch {
+                flowModel._shareFlow.collect { value ->
+                    LogUtils.d("shareflow  collect2  : $value")
+                }
+            }
+        }
+        flowOrLiveDataBind.flow15.setOnClickListener {
+            flowModel.updateShareFlow1()
+            lifecycleScope.launch {
+                delay(200)
+                flowModel.shareFlow.collect { value ->
+                    LogUtils.d("flow15  collect1  : $value")
+                }
+            }
+            lifecycleScope.launch {
+                delay(100)
+                flowModel.shareFlow.collect { value ->
+                    LogUtils.d("flow15  collect2  : $value")
+                }
             }
         }
     }

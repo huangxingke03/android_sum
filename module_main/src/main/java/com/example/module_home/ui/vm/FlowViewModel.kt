@@ -9,19 +9,26 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.toCollection
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FlowViewModel : ViewModel() {
-    val stateFlow = MutableStateFlow(String)
-    val shareFlow = MutableSharedFlow<String>()
+    val _stateFlow1 = MutableStateFlow("stateflow默认值")
+    var stateFlow1 = _stateFlow1.asStateFlow()
+
+    val _stateFlow2 = MutableStateFlow<List<String>>(emptyList())
+    var stateFlow2 = _stateFlow2.asStateFlow()
+
+    val _shareFlow = MutableSharedFlow<String>(2, 6)
+    var shareFlow=_shareFlow.asSharedFlow()
     var time = 0
     var maxIndex = 5
 
@@ -101,10 +108,44 @@ class FlowViewModel : ViewModel() {
         }
     }
 
+    fun getStateFlow1() {
+        _stateFlow1.value = "stateFlow开始初始化"
+        viewModelScope.launch {
+            delay(800)
+            _stateFlow1.value = "stateFlow执行耗时操作,最终执行成功"
+        }
+    }
+
+    fun getStateFlow2() {
+        viewModelScope.launch {
+            delay(800)
+            _stateFlow2.value = arrayListOf("StateFlowItem1", "StateFlowItem2", "StateFlowItem3")
+        }
+    }
+
+    fun updateShareFlow1() {
+        time = 0
+        viewModelScope.launch {
+            while (time < 6) {
+                time++
+                delay(50)
+                _shareFlow.emit("shareFlow update1 index : $time")
+            }
+        }
+    }
+
+    fun updateShareFlow2() {
+        time = 0
+        while (time < 6) {
+            time++
+            _shareFlow.tryEmit("shareFlow update2 index : $time")
+        }
+    }
+
     private fun requestNet(block: (String) -> Unit) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                LogUtils.d("模拟网络")
+                LogUtils.d("模拟连接网络")
                 delay(1000)
                 block.invoke("网络加载结束")
             }

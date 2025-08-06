@@ -3,70 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/flow1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="flow" />
+            android:layout_marginTop="45dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/flow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="flowOf" />
+            <Button
+                android:id="@+id/flow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="flow" />
 
-        <Button
-            android:id="@+id/flow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="asFlow" />
+            <Button
+                android:id="@+id/flow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="flowOf" />
 
-        <Button
-            android:id="@+id/flow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="callBackFlow" />
+            <Button
+                android:id="@+id/flow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asFlow" />
 
-        <Button
-            android:id="@+id/flow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="channelFlow" />
+            <Button
+                android:id="@+id/flow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="callBackFlow" />
 
-        <Button
-            android:id="@+id/flow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="collectLatest" />
+            <Button
+                android:id="@+id/flow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="channelFlow" />
 
-        <Button
-            android:id="@+id/flow7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="flow toList" />
+            <Button
+                android:id="@+id/flow6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="collectLatest" />
 
-        <Button
-            android:id="@+id/flow8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="flow toSet" />
+            <Button
+                android:id="@+id/flow7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="flow toList" />
 
-        <Button
-            android:id="@+id/flow9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="flow toCollection" />
+            <Button
+                android:id="@+id/flow8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="flow toSet" />
 
-        <TextView
-            android:id="@+id/flow_text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/flow9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="flow toCollection" />
+
+            <Button
+                android:id="@+id/flow10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="stateflow normal" />
+
+            <Button
+                android:id="@+id/flow11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="stateflow list" />
+
+            <Button
+                android:id="@+id/flow12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="stateflow" />
+
+            <Button
+                android:id="@+id/flow13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="shared Flow1" />
+
+            <Button
+                android:id="@+id/flow14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="shared Flow2" />
+
+            <Button
+                android:id="@+id/flow15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="shared Flow 连续注册多个" />
+
+            <Button
+                android:id="@+id/flow16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="shared Flow" />
+
+            <TextView
+                android:id="@+id/flow_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </layout>
