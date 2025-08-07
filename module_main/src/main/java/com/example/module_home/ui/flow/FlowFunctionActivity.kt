@@ -49,10 +49,11 @@ class FlowFunctionActivity : AppCompatActivity() {
     val flowModel by lazy {
         ViewModelProvider(this).get(FlowViewModel::class.java)
     }
+    var flowFunctionDataBind: ActivityFlowFunctionBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val flowFunctionDataBind = DataBindingUtil.setContentView<ActivityFlowFunctionBinding>(
+        flowFunctionDataBind = DataBindingUtil.setContentView<ActivityFlowFunctionBinding>(
             this, R.layout.activity_flow_function
         )
         val listAdapter = ListAdapter().apply {
@@ -74,17 +75,27 @@ class FlowFunctionActivity : AppCompatActivity() {
                     6 -> flow7()
                     7 -> flow8()
                     8 -> flow9()
-                    9 -> flow10()
+                    9 -> stateflowNormal()
                     10 -> flow11()
-                    11 -> flow12()
+                    11 -> stateflow()
                     12 -> flow13()
                     13 -> flow14()
                     14 -> flow15()
                 }
             }
         })
-        flowFunctionDataBind.flowFunction.adapter=listAdapter
-        flowFunctionDataBind.flowFunction.layoutManager = LinearLayoutManager(this)
+        flowFunctionDataBind?.flowFunction?.adapter = listAdapter
+        flowFunctionDataBind?.flowFunction?.layoutManager = LinearLayoutManager(this)
+        init()
+    }
+
+    fun init() {
+        lifecycleScope.launch {
+            flowModel.stateFlow1.collect { value ->
+                LogUtils.d("stateflow collect  : $value")
+                flowFunctionDataBind?.flowText1?.text = value
+            }
+        }
     }
 
     fun flow1() {
@@ -164,13 +175,9 @@ class FlowFunctionActivity : AppCompatActivity() {
         }
     }
 
-    fun flow10() {
-        flowModel.getStateFlow1()
-        lifecycleScope.launch {
-            flowModel.stateFlow1.collect { value ->
-                LogUtils.d("stateflow collect  : $value")
-            }
-        }
+    fun stateflowNormal() {
+//        flowModel.getStateFlow1()
+
     }
 
     fun flow11() {
@@ -187,12 +194,13 @@ class FlowFunctionActivity : AppCompatActivity() {
         }
     }
 
-    fun flow12() {
-        lifecycleScope.launch {
-            flowModel.stateFlow2.collect { list ->
-                LogUtils.d("stateflowlist flow12 collect  : $list")
-            }
-        }
+    fun stateflow() {
+//        lifecycleScope.launch {
+//            flowModel.stateFlow2.collect { list ->
+//                LogUtils.d("stateflowlist flow12 collect  : $list")
+//            }
+//        }
+        flowModel.getStateFlow1()
     }
 
     fun flow13() {

@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FlowViewModel : ViewModel() {
-    val _stateFlow1 = MutableStateFlow("stateflow默认值")
+    val _stateFlow1 = MutableStateFlow("stateflow数据没更新")
     var stateFlow1 = _stateFlow1.asStateFlow()
 
     val _stateFlow2 = MutableStateFlow<List<String>>(emptyList())
@@ -109,11 +109,11 @@ class FlowViewModel : ViewModel() {
     }
 
     fun getStateFlow1() {
-        _stateFlow1.value = "stateFlow开始初始化"
-        viewModelScope.launch {
-            delay(800)
-            _stateFlow1.value = "stateFlow执行耗时操作,最终执行成功"
-        }
+        _stateFlow1.value = "stateFlow数据更新"
+//        viewModelScope.launch {
+//            delay(800)
+//            _stateFlow1.value = "stateFlow执行耗时操作,最终执行成功"
+//        }
     }
 
     fun getStateFlow2() {
