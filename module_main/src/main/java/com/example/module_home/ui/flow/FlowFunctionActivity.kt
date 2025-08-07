@@ -1,4 +1,4 @@
-package com.example.module_home.ui
+package com.example.module_home.ui.flow
 
 import android.os.Bundle
 import android.view.View

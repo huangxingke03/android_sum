@@ -17,7 +17,7 @@ import com.example.common.content.PagePath
 import com.example.common.ui.base.ARouterActivity
 import com.example.module_home.R
 import com.example.module_home.databinding.ActivityHomeBinding
-import com.example.module_home.ui.vm.TestViewModel
+import com.example.module_home.ui.vm.LiveDataViewModel
 import java.util.*
 
 /**
@@ -43,7 +43,7 @@ class HomeActivity : ARouterActivity() {
     var time = 10
     var url1 = "http://pic1.win4000.com/wallpaper/c/58f8211a3a604.jpg"
     val model by lazy {
-        ViewModelProvider(this).get(TestViewModel::class.java)
+        ViewModelProvider(this).get(LiveDataViewModel::class.java)
     }
 
     var handle1 = object : Handler(Looper.getMainLooper()) {
@@ -71,7 +71,7 @@ class HomeActivity : ARouterActivity() {
         var homeBind =
             DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         val listAdapter = ListAdapter().apply {
-            submitList(arrayListOf("flow", "button2", "button3", "button2"))
+            submitList(arrayListOf("flow", "liveData", "button3", "button2"))
         }
         listAdapter.setOnItemClickListener(object : OnItemClickListener<String> {
             override fun onClick(
@@ -82,6 +82,8 @@ class HomeActivity : ARouterActivity() {
                 LogUtils.d("---setOnItemClickListener--- $position")
                 when (position) {
                     0 -> ARouter.getInstance().build(PagePath.ModuleMainPage.FLOW_PAGE).navigation()
+                    1 -> ARouter.getInstance().build(PagePath.ModuleMainPage.LIVE_DATA_PAGE)
+                        .navigation()
                 }
             }
         })
