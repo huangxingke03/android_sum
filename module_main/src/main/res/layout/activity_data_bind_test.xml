@@ -12,10 +12,6 @@
 
         <import type="com.example.common.bean.DataBindUser" />
 
-        <import
-            alias="moderUser"
-            type="com.example.common.model.DataBindUser" />
-
         <variable
             name="user2"
             type="DataBindUser" />
@@ -23,6 +19,10 @@
         <variable
             name="user3"
             type="DataBindUser" />
+
+        <import
+            alias="moderUser"
+            type="com.example.common.model.DataBindUser" />
 
         <variable
             name="user4"
