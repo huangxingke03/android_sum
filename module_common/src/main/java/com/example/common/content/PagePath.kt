@@ -31,5 +31,6 @@ object PagePath {
         const val FLOW_PAGE = "/main/module/flow/page"
         const val LIVE_DATA_PAGE = "/main/module/liveData/page"
         const val BIND_TEST_PAGE = "/main/module/bindTest/page"
+        const val COMPOSE_TEST_PAGE = "/main/module/composeTest/page"
     }
 }

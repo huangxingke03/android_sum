@@ -58,8 +58,10 @@ dependencies {
     api rootProject.ext.library.rxandroid
     api rootProject.ext.library.adapterRxjava3
     //compose
+    api rootProject.ext.library.activityCompose
     api rootProject.ext.library.lifecycleViewmodelCompose
     api rootProject.ext.library.composeRuntimeLivedata
+    api rootProject.ext.library.composeRuntimeRxjava
     //ViewModel
     implementation rootProject.ext.library.lifecycleViewmodel
     implementation rootProject.ext.library.lifecycleRuntimeKtx

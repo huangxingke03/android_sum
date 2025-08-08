@@ -3,6 +3,11 @@
 
     <application>
         <activity
+            android:name=".ui.compose.ComposeTestActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_test"
+            android:theme="@style/Theme.Andoid_sum" />
+        <activity
             android:name=".ui.databind.DataBindTestActivity"
             android:exported="false" />
         <activity

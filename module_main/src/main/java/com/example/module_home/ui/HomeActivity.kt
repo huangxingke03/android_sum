@@ -71,7 +71,7 @@ class HomeActivity : ARouterActivity() {
         var homeBind =
             DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         val listAdapter = ListAdapter().apply {
-            submitList(arrayListOf("flow", "liveData", "dataBindTest", "button2"))
+            submitList(arrayListOf("flow", "liveData", "dataBindTest", "composeTest"))
         }
         listAdapter.setOnItemClickListener(object : OnItemClickListener<String> {
             override fun onClick(
@@ -84,6 +84,9 @@ class HomeActivity : ARouterActivity() {
                         .navigation()
 
                     2 -> ARouter.getInstance().build(PagePath.ModuleMainPage.BIND_TEST_PAGE)
+                        .navigation()
+
+                    3 -> ARouter.getInstance().build(PagePath.ModuleMainPage.COMPOSE_TEST_PAGE)
                         .navigation()
                 }
             }
