@@ -21,6 +21,13 @@ ext {
                lifecycleViewmodel           : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2',
                lifecycleRuntimeKtx          : 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.2',
                lifecycleLiveData            : 'androidx.lifecycle:lifecycle-livedata:2.9.2',
+               navigationCompose            : 'androidx.navigation:navigation-compose:2.9.3',
+               navigationFragment           : 'androidx.navigation:navigation-fragment:2.9.3',
+               navigationFragmentKtx        : 'androidx.navigation:navigation-fragment-ktx:2.6.0',
+               navigationUi                 : 'androidx.navigation:navigation-ui:2.9.3',
+               navigationUiKtx              : 'androidx.navigation:navigation-ui-ktx:2.6.0'
+
+
     ]
     sdkConfig = [
             compileSdk: 35,

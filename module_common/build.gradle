@@ -72,4 +72,7 @@ dependencies {
     api rootProject.ext.library.leakcanary
     //图片
     api rootProject.ext.library.glide
+    //路由
+    api rootProject.ext.library.navigationFragmentKtx
+    api rootProject.ext.library.navigationUiKtx
 }
