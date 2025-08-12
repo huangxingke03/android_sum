@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -78,6 +80,7 @@ fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
         }
         SearchBar(modifier = Modifier.padding(15.0.dp))
         BodyInfoView(bodyList, modifier = Modifier.padding(15.0.dp))
+        FavoriteCard(modifier = Modifier.padding(15.0.dp))
     }
 }
 
@@ -125,5 +128,31 @@ fun BodyInfoItemView(
                 .width(45.0.dp)
                 .padding(0.0.dp, 10.0.dp, 0.0.dp, 0.0.dp)
         )
+    }
+}
+
+@Composable
+fun FavoriteCard(modifier: Modifier = Modifier) {
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier,
+        color = MaterialTheme.colorScheme.secondaryContainer,
+    ) {
+        Row(
+            modifier = Modifier.width(200.0.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.fc2_nature_meditations),
+                contentDescription = null,
+                modifier = Modifier.size(80.0.dp),
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = stringResource(R.string.favorite_collections),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(horizontal = 15.0.dp)
+            )
+        }
     }
 }
