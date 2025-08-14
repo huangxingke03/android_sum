@@ -38,6 +38,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -60,7 +61,6 @@ import com.example.module_home.ui.compose.ui.theme.Andoid_sumTheme
 import com.example.module_home.ui.data.BodyItemInfo
 import com.example.module_home.ui.vm.ComposeViewModel
 import com.example.module_utils.R
-import kotlin.random.Random
 
 @Route(path = PagePath.ModuleMainPage.COMPOSE_TEST_PAGE)
 class ComposeTestActivity : ComponentActivity() {
@@ -68,18 +68,27 @@ class ComposeTestActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Andoid_sumTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    Greeting()
-                }
-            }
+            MainScreen()
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    Andoid_sumTheme {
+        Scaffold(bottomBar = { NavigationBarView() }) { padding ->
+            HomeScreen(
+                Modifier.padding(
+                    padding
+                )
+            )
         }
     }
 }
 
 @Preview
 @Composable
-fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
+fun HomeScreen(modifier: Modifier = Modifier, composeViewModel: ComposeViewModel = viewModel()) {
     val title by composeViewModel.titleFlow.collectAsState()
     val favoriteTitle by composeViewModel.favoriteTitleFlow.collectAsState()
     val bodyList by composeViewModel.bodyListFlow.collectAsState()
@@ -96,7 +105,6 @@ fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
         BodyInfoSection(title, bodyList)
         Spacer(modifier = Modifier.height(10.0.dp))
         FavoriteSection(favoriteTitle, favoriteList)
-        NavigationBarView()
     }
 }
 
