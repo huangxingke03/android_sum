@@ -7,13 +7,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -34,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -79,7 +83,12 @@ fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
             Text("更新数据")
         }
         SearchBar(modifier = Modifier.padding(15.0.dp))
-        BodyInfoView(bodyList, modifier = Modifier.padding(15.0.dp))
+        BodyInfoView(
+            bodyList,
+            modifier = Modifier
+                .background(colorResource(com.example.module_home.R.color.purple_200))
+                .padding(8.0.dp)
+        )
         FavoriteCard(modifier = Modifier.padding(15.0.dp))
     }
 }
@@ -98,7 +107,13 @@ fun SearchBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun BodyInfoView(itemDataList: List<BodyItemInfo>, modifier: Modifier = Modifier) {
-    LazyRow(modifier = modifier) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(
+            horizontal = 10.0.dp
+        ),
+        modifier = modifier,
+    ) {
         items(itemDataList) { itemData ->
             BodyInfoItemView(itemData.drawableRes, itemData.titleRes)
         }
@@ -118,15 +133,16 @@ fun BodyInfoItemView(
             painter = painterResource(drawable),
             contentDescription = null,
             modifier = Modifier
-                .size(30.0.dp)
-                .clip(CircleShape),
+                .size(88.0.dp)
+                .clip(CircleShape)
+                .paddingFromBaseline(10.0.dp),
             contentScale = ContentScale.Crop
         )
         Text(
             text = stringResource(text),
             modifier = Modifier
-                .width(45.0.dp)
-                .padding(0.0.dp, 10.0.dp, 0.0.dp, 0.0.dp)
+                .paddingFromBaseline(10.0.dp, 10.0.dp),
+            style = MaterialTheme.typography.bodyMedium
         )
     }
 }
