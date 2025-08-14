@@ -29,10 +29,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -91,6 +96,7 @@ fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
         BodyInfoSection(title, bodyList)
         Spacer(modifier = Modifier.height(10.0.dp))
         FavoriteSection(favoriteTitle, favoriteList)
+        NavigationBarView()
     }
 }
 
@@ -234,5 +240,32 @@ fun FavoriteCard(
                 modifier = Modifier.padding(horizontal = 15.0.dp)
             )
         }
+    }
+}
+
+@Composable
+fun NavigationBarView(modifier: Modifier = Modifier) {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Face,
+                    contentDescription = null
+                )
+            },
+            label = { Text(text = stringResource(R.string.bottom_navigation_profile)) },
+            selected = true, onClick = {})
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = null
+                )
+            },
+            label = { Text(text = stringResource(R.string.bottom_navigation_home)) },
+            selected = false, onClick = {})
     }
 }
