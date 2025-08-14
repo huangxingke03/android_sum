@@ -20,6 +20,9 @@ import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -71,6 +74,7 @@ class ComposeTestActivity : ComponentActivity() {
 fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
     val title by composeViewModel.titleFlow.collectAsState()
     val bodyList by composeViewModel.bodyListFlow.collectAsState()
+    val favoriteList by composeViewModel.favoriteListFlow.collectAsState()
     Column(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
@@ -89,7 +93,12 @@ fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
                 .background(colorResource(com.example.module_home.R.color.purple_200))
                 .padding(8.0.dp)
         )
-        FavoriteCard(modifier = Modifier.padding(15.0.dp))
+        FavoriteView(
+            favoriteList,
+            modifier = Modifier
+                .padding(top = 8.0.dp)
+                .background(colorResource(com.example.module_home.R.color.purple_700))
+        )
     }
 }
 
@@ -106,15 +115,15 @@ fun SearchBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BodyInfoView(itemDataList: List<BodyItemInfo>, modifier: Modifier = Modifier) {
+fun BodyInfoView(bodyDataList: List<BodyItemInfo>, modifier: Modifier = Modifier) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(
-            horizontal = 10.0.dp
+            horizontal = 16.0.dp
         ),
         modifier = modifier,
     ) {
-        items(itemDataList) { itemData ->
+        items(bodyDataList) { itemData ->
             BodyInfoItemView(itemData.drawableRes, itemData.titleRes)
         }
     }
@@ -148,7 +157,29 @@ fun BodyInfoItemView(
 }
 
 @Composable
-fun FavoriteCard(modifier: Modifier = Modifier) {
+fun FavoriteView(favouriteDataList: List<BodyItemInfo>, modifier: Modifier = Modifier) {
+    LazyHorizontalGrid(
+        modifier = modifier
+            .height(168.0.dp)
+            .padding(top = 8.0.dp, bottom = 8.0.dp),
+        rows = GridCells.Fixed(2),
+        contentPadding = PaddingValues(
+            horizontal = 16.0.dp
+        ),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.0.dp)
+    ) {
+        items(favouriteDataList) { item ->
+            FavoriteCard(item.drawableRes, item.titleRes, Modifier.height(80.0.dp))
+        }
+    }
+}
+
+@Composable
+fun FavoriteCard(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int, modifier: Modifier = Modifier
+) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         modifier = modifier,
@@ -159,13 +190,13 @@ fun FavoriteCard(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(R.drawable.fc2_nature_meditations),
+                painter = painterResource(drawable),
                 contentDescription = null,
                 modifier = Modifier.size(80.0.dp),
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = stringResource(R.string.favorite_collections),
+                text = stringResource(text),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(horizontal = 15.0.dp)
             )

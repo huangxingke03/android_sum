@@ -13,8 +13,13 @@ class ComposeViewModel : ViewModel() {
     private var _bodyListFlow = MutableStateFlow<List<BodyItemInfo>>(emptyList())
     val bodyListFlow = _bodyListFlow.asStateFlow()
 
+    private var _favoriteListFlow = MutableStateFlow<List<BodyItemInfo>>(emptyList())
+    val favoriteListFlow = _favoriteListFlow.asStateFlow()
+
+
     init {
         initBodyList()
+        initFavoriteList()
     }
 
     fun updateTitle(newTitleValue: String) {
@@ -36,5 +41,22 @@ class ComposeViewModel : ViewModel() {
             }
         }
         _bodyListFlow.value = bodyDataList
+    }
+
+    fun initFavoriteList() {
+        val bodyDataList = listOf(
+            R.drawable.fc1_short_mantras to R.string.fc1_short_mantras,
+            R.drawable.fc2_nature_meditations to R.string.fc2_nature_meditations,
+            R.drawable.fc3_stress_and_anxiety to R.string.fc3_stress_and_anxiety,
+            R.drawable.fc4_self_massage to R.string.fc4_self_massage,
+            R.drawable.fc5_overwhelmed to R.string.fc5_overwhelmed,
+            R.drawable.fc6_nightly_wind_down to R.string.fc6_nightly_wind_down
+        ).map {
+            BodyItemInfo().apply {
+                drawableRes = it.first
+                titleRes = it.second
+            }
+        }
+        _favoriteListFlow.value = bodyDataList
     }
 }
