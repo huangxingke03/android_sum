@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,10 +39,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.TextField
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -64,31 +71,51 @@ import com.example.module_utils.R
 
 @Route(path = PagePath.ModuleMainPage.COMPOSE_TEST_PAGE)
 class ComposeTestActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainScreen()
+            val windowSizeClass = calculateWindowSizeClass(this)
+            MainScreen(windowSizeClass)
         }
     }
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(windowSize: WindowSizeClass) {
     Andoid_sumTheme {
-        Scaffold(bottomBar = { NavigationBarView() }) { padding ->
-            HomeScreen(
-                Modifier.padding(
-                    padding
-                )
-            )
+        when (windowSize.widthSizeClass) {
+            WindowWidthSizeClass.Compact ->
+                VerticalScreen()
+
+            WindowWidthSizeClass.Expanded ->
+                HorizontalScreen()
         }
     }
 }
 
-@Preview
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, composeViewModel: ComposeViewModel = viewModel()) {
+fun VerticalScreen() {
+    Scaffold(bottomBar = { NavigationBarVerticalView() }) { padding ->
+        ContentScreen(
+            Modifier.padding(
+                padding
+            )
+        )
+    }
+}
+
+@Composable
+fun HorizontalScreen() {
+    Row {
+        NavigationBarHorizontalView()
+        ContentScreen()
+    }
+}
+
+@Composable
+fun ContentScreen(modifier: Modifier = Modifier, composeViewModel: ComposeViewModel = viewModel()) {
     val title by composeViewModel.titleFlow.collectAsState()
     val favoriteTitle by composeViewModel.favoriteTitleFlow.collectAsState()
     val bodyList by composeViewModel.bodyListFlow.collectAsState()
@@ -252,7 +279,7 @@ fun FavoriteCard(
 }
 
 @Composable
-fun NavigationBarView(modifier: Modifier = Modifier) {
+fun NavigationBarVerticalView(modifier: Modifier = Modifier) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
@@ -275,5 +302,38 @@ fun NavigationBarView(modifier: Modifier = Modifier) {
             },
             label = { Text(text = stringResource(R.string.bottom_navigation_home)) },
             selected = false, onClick = {})
+    }
+}
+
+@Composable
+fun NavigationBarHorizontalView(modifier: Modifier = Modifier) {
+    NavigationRail(
+        containerColor = MaterialTheme.colorScheme.background,
+        modifier = modifier
+    ) {
+        Column(
+            modifier = modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            NavigationRailItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Face,
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = stringResource(R.string.bottom_navigation_profile)) },
+                selected = true, onClick = {})
+            NavigationRailItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = stringResource(R.string.bottom_navigation_home)) },
+                selected = false, onClick = {})
+        }
     }
 }
