@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,7 +25,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -73,30 +76,21 @@ class ComposeTestActivity : ComponentActivity() {
 @Composable
 fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
     val title by composeViewModel.titleFlow.collectAsState()
+    val favoriteTitle by composeViewModel.favoriteTitleFlow.collectAsState()
     val bodyList by composeViewModel.bodyListFlow.collectAsState()
     val favoriteList by composeViewModel.favoriteListFlow.collectAsState()
     Column(
-        modifier = Modifier.padding(10.dp),
+        modifier = Modifier
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = title
-        )
-        Button(onClick = { composeViewModel.updateTitle("新标题 ${Random.nextInt()}") }) {
-            Text("更新数据")
-        }
-        SearchBar(modifier = Modifier.padding(15.0.dp))
-        BodyInfoSection(
-            "bodyInfoList",
-            bodyList
-        )
-        FavoriteView(
-            favoriteList,
-            modifier = Modifier
-                .padding(top = 8.0.dp)
-                .background(colorResource(com.example.module_home.R.color.purple_700))
-        )
+        SearchBar()
+        Spacer(modifier = Modifier.height(10.0.dp))
+        BodyInfoSection(title, bodyList)
+        Spacer(modifier = Modifier.height(10.0.dp))
+        FavoriteSection(favoriteTitle, favoriteList)
     }
 }
 
@@ -127,7 +121,26 @@ fun BodyInfoSection(
             bodyDataList,
             modifier = Modifier
                 .background(colorResource(com.example.module_home.R.color.purple_200))
-                .padding(8.0.dp)
+                .padding(top = 8.0.dp)
+        )
+    }
+}
+
+@Composable
+fun FavoriteSection(
+    titleString: String,
+    favoriteDataList: List<BodyItemInfo>,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = titleString,
+            style = MaterialTheme.typography.titleMedium
+        )
+        FavoriteView(
+            favoriteDataList, modifier = Modifier
+                .background(colorResource(com.example.module_home.R.color.purple_700))
+                .padding(top = 8.0.dp)
         )
     }
 }
@@ -175,14 +188,16 @@ fun BodyInfoItemView(
 }
 
 @Composable
-fun FavoriteView(favouriteDataList: List<BodyItemInfo>, modifier: Modifier = Modifier) {
+fun FavoriteView(
+    favouriteDataList: List<BodyItemInfo>,
+    modifier: Modifier = Modifier
+) {
     LazyHorizontalGrid(
         modifier = modifier
-            .height(168.0.dp)
-            .padding(top = 8.0.dp, bottom = 8.0.dp),
+            .height(168.0.dp),
         rows = GridCells.Fixed(2),
         contentPadding = PaddingValues(
-            horizontal = 16.0.dp
+            16.0.dp
         ),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.0.dp)

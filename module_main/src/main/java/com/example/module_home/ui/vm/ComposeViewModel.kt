@@ -10,6 +10,9 @@ class ComposeViewModel : ViewModel() {
     private var _titleFlow = MutableStateFlow<String>("compose默认标题")
     val titleFlow = _titleFlow.asStateFlow()
 
+    private var _favoriteTitleFlow = MutableStateFlow<String>("compose默认标题")
+    val favoriteTitleFlow = _favoriteTitleFlow.asStateFlow()
+
     private var _bodyListFlow = MutableStateFlow<List<BodyItemInfo>>(emptyList())
     val bodyListFlow = _bodyListFlow.asStateFlow()
 
@@ -24,6 +27,10 @@ class ComposeViewModel : ViewModel() {
 
     fun updateTitle(newTitleValue: String) {
         _titleFlow.value = newTitleValue
+    }
+
+    fun updateFavoriteTitle(newTitleValue: String) {
+        _favoriteTitleFlow.value = newTitleValue
     }
 
     fun initBodyList() {
@@ -41,6 +48,7 @@ class ComposeViewModel : ViewModel() {
             }
         }
         _bodyListFlow.value = bodyDataList
+        updateTitle("BodyInfoList")
     }
 
     fun initFavoriteList() {
@@ -58,5 +66,6 @@ class ComposeViewModel : ViewModel() {
             }
         }
         _favoriteListFlow.value = bodyDataList
+        updateFavoriteTitle("FavoriteList")
     }
 }
