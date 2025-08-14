@@ -87,11 +87,9 @@ fun Greeting(composeViewModel: ComposeViewModel = viewModel()) {
             Text("更新数据")
         }
         SearchBar(modifier = Modifier.padding(15.0.dp))
-        BodyInfoView(
-            bodyList,
-            modifier = Modifier
-                .background(colorResource(com.example.module_home.R.color.purple_200))
-                .padding(8.0.dp)
+        BodyInfoSection(
+            "bodyInfoList",
+            bodyList
         )
         FavoriteView(
             favoriteList,
@@ -112,6 +110,26 @@ fun SearchBar(modifier: Modifier = Modifier) {
                 imageVector = Icons.Default.Search, contentDescription = null
             )
         }, placeholder = { Text(stringResource(R.string.placeholder_search)) }, onValueChange = {})
+}
+
+@Composable
+fun BodyInfoSection(
+    titleString: String,
+    bodyDataList: List<BodyItemInfo>,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = titleString,
+            style = MaterialTheme.typography.titleMedium
+        )
+        BodyInfoView(
+            bodyDataList,
+            modifier = Modifier
+                .background(colorResource(com.example.module_home.R.color.purple_200))
+                .padding(8.0.dp)
+        )
+    }
 }
 
 @Composable
