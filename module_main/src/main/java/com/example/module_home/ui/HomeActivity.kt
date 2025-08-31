@@ -19,6 +19,7 @@ import com.example.module_home.R
 import com.example.module_home.databinding.ActivityHomeBinding
 import com.example.module_home.ui.vm.LiveDataViewModel
 import java.util.*
+import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * 首页
@@ -34,8 +35,10 @@ class HomeActivity : ARouterActivity() {
 
     var arryList = ArrayList<String>()
     var linkList = LinkedList<String>()
+    var vector = Vector<String>()
+    var copyOnWriteArrayList = CopyOnWriteArrayList<String>()
 
-    var hashMap = HashMap<String, String>()
+    var hashMap = HashMap<String?, String?>()
     var hashtable = Hashtable<String, String>()
     var linkHashMap = LinkedHashMap<String, String>()
 
@@ -93,5 +96,12 @@ class HomeActivity : ARouterActivity() {
         })
         homeBind.mainFunction.adapter = listAdapter
         homeBind.mainFunction.layoutManager = LinearLayoutManager(this)
+        initData()
+    }
+    fun initData(){
+        hashMap.put(null,"我是第一个")
+        hashMap.put("第二个",null)
+        hashMap.put("第三个",null)
+        LogUtils.d("------ $hashMap")
     }
 }
