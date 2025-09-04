@@ -21,9 +21,10 @@ import com.example.module_home.ui.vm.LiveDataViewModel
 @Route(path = PagePath.ModuleMainPage.LIVE_DATA_PAGE)
 class LiveDataFunctionActivity : AppCompatActivity() {
     val liveDataFunctionList = arrayListOf(
-        "数据更新",
+        "复现数据倒灌",
         "flowOf",
-        "asFlow"
+        "asFlow",
+        "Livedata只发一次事件修复数据倒灌"
     )
     val liveDataViewModel by lazy {
         ViewModelProvider(this).get(LiveDataViewModel::class)
@@ -47,18 +48,29 @@ class LiveDataFunctionActivity : AppCompatActivity() {
             ) {
                 when (position) {
                     0 -> test1()
+                    3 -> test2()
                 }
             }
         })
         liveDataFunctionDataBind.liveDataFunction.adapter = listAdapter
         liveDataFunctionDataBind.liveDataFunction.layoutManager = LinearLayoutManager(this)
-        liveDataViewModel.setDataValue("第一次初始化")
+        init()
+    }
+
+    fun init() {
         liveDataViewModel.data1.observe(this) { data ->
-            LogUtils.d("livedata数据 收到 --->$data")
+            LogUtils.d("livedata数据 复现数据倒灌 data1 --->$data")
+        }
+        liveDataViewModel.data2.observe(this) { data ->
+            LogUtils.d("livedata数据 修复数据倒灌只触发一次 data2 --->$data")
         }
     }
 
     fun test1() {
-        liveDataViewModel.setDataValue("数据更新")
+        liveDataViewModel.setDataValue1("更新数据->复现数据倒灌")
+    }
+
+    fun test2() {
+        liveDataViewModel.setDataValue2("更新数据->解决数据倒灌(事件只触发一次)")
     }
 }
