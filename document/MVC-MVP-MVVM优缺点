@@ -1,0 +1,52 @@
+MVC —— Model-View-Controller: 作为 Controller 层的 Actvity/Fragment 等充当了 View 的角色，代码过于臃肿；
+同时在View层又容易直接操作 Model，导致 View 和 Model 层耦合，无法独立复用。有时候看到一个Activity能有几千甚至上万行的代码，简直噩梦。
+
+Model：模型层，数据模型及其业务逻辑，是针对业务模型建立的数据结构，Model与View无关，而与业务有关。
+View：视图层，用于与用户实现交互的页面，通常实现数据的输入和输出功能。
+Controller：控制器，用于连接Model层和View层，完成Model层和View层的交互。还可以处理页面业务逻辑，它接收并处理来自用户的请求，
+并将Model返回给用户。
+    优点：
+    耦合性低，生命周期成本低，部署快，可维护性高，适用于快速开发的小型项目
+    缺点：
+    不适合大型，中等项目，View层Controller层连接过于紧密
+    View层对Model层的访问效率低
+    一般的高级UI页面工具和构造器不支持MVC模式
+
+MVP —— Model-View-Presenter:
+    Presenter 和 View 层之间通过定义接口实现通信，解耦了 View 和 Model 层。然而当业务场景比较复杂时，接口定义会越来越多，
+    且可能定义模糊，接口一旦变化，对应实现也需要发生变化。
+    Model：模型层，用于数据存储以及业务逻辑。
+    View：视图层，用于展示与用户实现交互的页面，通常实现数据的输入和输出功能。
+    Presenter：表示器，用于连接M层、V层，完成Model层与View层的交互，还可以进行业务逻辑的处理。
+    执行流程：
+    1、View层收到用户的操作
+    2、View层把用户的操作交给Presenter
+    3、Presenter直接操作Model层进行业务逻辑处理
+    4、Model层处理完毕后，通知Presenter
+    5、Presenter收到通知后，去更新View层
+    在MVP模式中，Model与View无法直接进行交互，所以Presenter层会从Model层获得数据，适当处理后交给View层进行显示
+    在MVP模式中，Presenter层将View层和Model层进行隔离，使View和Model之间不存在耦合，同时将业务逻辑从View层剥离。
+    优点：
+        可以更高效的使用Model，所有的交互都发生在——Presenter内部
+        将一个Presenter用于多个视图，而不需要改变Presenter的逻辑，View变化比Model变化频繁，逻辑结构清晰，View层代码不再臃肿
+    缺点：
+    1、MVP模式基于接口设计，会增加很多类，代码逻辑虽然清晰，但代码量庞大
+    2、MVP适用于中小型项目，大型项目慎用
+
+ MVC和MVP的主要区别：
+    1、MVP中View与Model并不直接交互，而是通过与Presenter交互来与Model间接交互
+    2、MVP中Controller是基于行为的，并且可以被多个View共享，Controller可以负责决定显示哪个View
+    3、MVP中Presenter与View的交互是通过接口来进行的，更有利于添加单元测试。
+    4、MVC中View可以与Model直接交互，通常View与Presenter是一对一的，但复杂的View可能绑定多个Presenter来处理逻辑
+
+MVVM —— Model-View-ViewModel:
+    MVVM 解决了 MVP 的问题，使得 ViewModel 和 View 之间不再依赖接口通信，而是通过 LiveData, RxJava, Flow 等响应式开发的方式来通信。
+    M——Model（模型）实体模型，定义实体类，获取业务数据模型，如通过数据库或者网络来操作数据等
+    V——View（视图）布局文件(XML），主要进行控件的初始化设置
+    VM——ViewModel（控制器）：连接 View 与 Model 的中间桥梁，ViewModel 与 Model 直接交互，通过DataBinding将数据变化反应给View
+	优点：
+	1	结构清晰，职责划分清晰
+	2	模块间充分解耦
+	3	在 MVP 的基础上，MVVM 把 View 和 ViewModel 也进行了解耦
+	缺点：
+	1、定位问题困难

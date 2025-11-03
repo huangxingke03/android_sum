@@ -1,0 +1,97 @@
+什么是模块化
+将应用分成多个独立的功能模块，各模块可独立存在和发布，根据需要，可以选择各个模块是连接在一起，还是单独发布。维护更便捷。提高团队协作效率。
+
+注意：模块化的思想是“按功能划分”，关注的是功能的分离，将应用划分为多个模块，每个模块可以独立构建和运行，主要解决功能模块之间的解耦和分工。
+
+适用于大型项目的功能分割，方便团队分工合作和功能的独立开发、测试及上线。比如：电商应用中的“用户模块”、“订单模块”、“商品模块”等。
+
+什么是组件化
+更加强调功能的封装和复用，组件通常是具有特定功能的独立单元，可以重复利用，强调的是模块内部的高度封装和对外的统一接口。
+适用于项目中复用性较高的功能单元，便于在多个项目中使用相同的组件。比如：图片加载组件、网络请求组件等。
+
+在很多安卓开发者的眼中，组件化和模块化经常被很多人混为一谈，会把“组件化+模块化”统称为“组件化”。但组件化注重于“按功能封装”
+
+组件化的关键点
+封装性：每个组件应只暴露必要的接口，内部实现细节完全封装。
+例如，网络组件提供 ApiClient 和 RetrofitManager 作为接口供其他模块调用，而不暴露内部实现。
+低耦合：各组件之间不直接依赖，通过接口或工具类进行交互。例如，图片加载组件通过静态方法或依赖注入调用，而不是直接耦合到具体业务中。
+统一入口：可以通过一个 ComponentManager 类管理所有组件，提供统一的初始化和使用入口。
+
+
+类锁和方法锁的区别
+对象锁（方法锁）是用来控制实例方法之间的同步，而类锁是用来控制静态方法（或者静态变量互斥体）之间的同步的。
+
+view的绘制流程
+View绘制就像装修房子：先量尺寸（Measure），再摆家具（Layout），最后粉刷墙面（Draw）。
+父View负责协调子View的测量和布局，而onDraw()是每个View自己完成的。
+
+1. Measure阶段
+在绘制之前，视图首先需要测量其大小。这一步是通过调用measure()方法完成的，该方法会调用onMeasure()方法。
+在这个阶段，视图会根据其布局参数（例如，宽度和高度）来计算它应该占据的尺寸。
+onMeasure()：这是视图类中用于测量视图大小的回调方法。开发者可以在这个方法中设置视图的精确尺寸。
+EXACTLY‌：父View指定了确切尺寸（如match_parent或具体数值）。
+AT_MOST‌：父View允许子View最大尺寸为指定值（如wrap_content）。
+UNSPECIFIED‌：父View未限制子View尺寸
+2. Layout阶段
+在测量阶段确定大小后，视图接下来需要确定其在父视图中的位置。这一步是通过调用layout()方法完成的，
+该方法会调用onLayout()方法。
+onLayout()：这个方法用于确定子视图的位置。开发者可以在此方法中设置子视图的布局参数（例如，x和y坐标）。
+3. Draw阶段
+最后，视图进入绘制阶段，这是通过调用draw()方法完成的，该方法会调用onDraw()方法。
+onDraw()：这是视图类中用于绘制视图内容的回调方法。开发者可以在这里进行实际的绘图操作，如绘制文本、图形等。
+4. Invalidate/Request Layout阶段
+如果视图的某些属性发生变化（例如大小、位置或内容），视图需要通过调用invalidate()方法来请求重绘。
+如果只是布局参数发生变化，还可以调用requestLayout()方法来请求重新测量和布局。
+5. 执行绘制
+当调用invalidate()或requestLayout()后，系统会按照上述流程重新执行测量、布局和绘制过程。
+
+事件分发的主要步骤如下：
+1.事件传递（Dispatching）
+    当用户在屏幕上进行触摸操作时，系统首先将触摸事件封装成MotionEvent对象。
+    事件首先传递给根视图（通常是Activity的DecorView），然后通过视图树向下传递。
+2.拦截（Intercepting）
+    在事件传递的过程中，ViewGroup可以决定是否拦截这个事件。
+    如果拦截，则该事件将不再传递给子视图；如果不拦截，则事件将继续向目标子视图传递。
+    ViewGroup通过调用onInterceptTouchEvent(MotionEvent ev)方法来决定是否拦截事件。
+
+3.处理（Processing）
+    如果事件被传递到具体的View，该View会调用dispatchTouchEvent(MotionEvent ev)来处理这个事件。
+    在dispatchTouchEvent内部，首先会调用onTouchEvent(MotionEvent ev)来尝试处理该事件。
+    如果onTouchEvent返回false，则事件会继续向上回传给父视图，直到找到一个视图处理它或者传递回Activity。
+
+livedata的原理
+LiveData是Android Architecture Components中用于数据管理的组件，
+其核心原理基于观察者模式和生命周期感知机制。以下是关键工作原理：
+1.核心功能
+    ‌数据持有‌：通过:ml-search[MutableLiveData]类持有动态数据（如网络数据、数据库数据），
+    支持setValue（主线程更新）和postValue（子线程更新）方法。
+2观察者管理‌：
+    内部维护ObserverWrapper列表，通过observe方法注册观察者，并将LifecycleOwner与观察者绑定。
+    当LifecycleOwner进入销毁状态时自动移除观察者，避免内存泄漏。
+3.生命周期感知
+    仅在LifecycleOwner处于活跃状态（如STARTED或RESUMED）时，才会触发数据更新通知。
+    当组件（如Activity/Fragment）生命周期变化时， LifecycleBoundObserver 会相应调整观察状态.
+4.数据更新机制
+    ‌主线程更新‌：调用setValue时，会立即通知所有活跃观察者。
+    ‌子线程更新‌：调用postValue时，数据变更会在主线程处理，确保线程安全。
+关键组件
+    Observer ‌：定义数据变更时的回调接口。
+    LifecycleOwner ‌：具有生命周期的组件（如Activity/Fragment），用于管理观察者的生命周期状态。
+
+线程池的种类
+线程池主要有以下六种常见类型：
+1.FixedThreadPool
+    线程数固定，适用于负载较重的服务器或需要资源分配可预测的场景，通常线程数设置为CPU核心数+1。
+2.CachedThreadPool
+    线程数几乎无限（最大为Integer.MAX_VALUE），适合处理大量短生命周期的异步任务，采用同步移交队列（SynchronousQueue）提高效率。
+3.ScheduledThreadPool
+    支持定时或周期性执行任务，核心线程数固定但非核心线程可动态调整，使用延迟工作队列（DelayedWorkQueue）。
+4.SingleThreadExecutor
+    仅有一个工作线程，保证任务顺序执行，适用于不需要并发但需要异步执行的场景。
+5.SingleThreadScheduledExecutor
+    结合单线程特性与定时任务功能，适用于需要顺序执行且周期性触发的场景。
+6.ForkJoinPool
+    采用工作窃取算法提升效率，适用于递归任务或需要并行计算的场景
+
+抓trace 的命令
+
