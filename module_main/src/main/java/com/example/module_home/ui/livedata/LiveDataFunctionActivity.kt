@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -28,6 +29,12 @@ class LiveDataFunctionActivity : AppCompatActivity() {
     )
     val liveDataViewModel by lazy {
         ViewModelProvider(this).get(LiveDataViewModel::class)
+    }
+    val observer1 = Observer { data1: String ->
+        LogUtils.d("livedata数据 复现数据倒灌 data1 --->$data1")
+    }
+    val observer2 = Observer { data2: String ->
+        LogUtils.d("livedata数据 修复数据倒灌只触发一次 data2 --->$data2")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,13 +64,11 @@ class LiveDataFunctionActivity : AppCompatActivity() {
         init()
     }
 
+
     fun init() {
-        liveDataViewModel.data1.observe(this) { data ->
-            LogUtils.d("livedata数据 复现数据倒灌 data1 --->$data")
-        }
-        liveDataViewModel.data2.observe(this) { data ->
-            LogUtils.d("livedata数据 修复数据倒灌只触发一次 data2 --->$data")
-        }
+        liveDataViewModel.data1.removeObserver(observer1)
+        liveDataViewModel.data1.observe(this, observer1)
+        liveDataViewModel.data2.observe(this, observer2)
     }
 
     fun test1() {

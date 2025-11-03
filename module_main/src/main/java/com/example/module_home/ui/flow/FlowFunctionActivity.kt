@@ -25,23 +25,43 @@ import kotlinx.coroutines.launch
 
 @Route(path = PagePath.ModuleMainPage.FLOW_PAGE)
 class FlowFunctionActivity : AppCompatActivity() {
+//    val flowFunctionList = arrayListOf(
+//        "flow",
+//        "flowOf",
+//        "asFlow",
+//        "callBackFlow",
+//        "channelFlow",
+//        "collectLatest",
+//        "flow toList",
+//        "flow toSet",
+//        "flow toCollection",
+//        "stateflow normal",
+//        "stateflow list",
+//        "stateflow",
+//        "shared Flow1",
+//        "shared Flow2",
+//        "shared Flow 连续注册多个",
+//        "shared Flow",
+//        "test"
+//    )
     val flowFunctionList = arrayListOf(
-        "flow",
-        "flowOf",
-        "asFlow",
-        "callBackFlow",
-        "channelFlow",
-        "collectLatest",
-        "flow toList",
-        "flow toSet",
-        "flow toCollection",
-        "stateflow normal",
-        "stateflow list",
-        "stateflow",
-        "shared Flow1",
-        "shared Flow2",
-        "shared Flow 连续注册多个",
-        "shared Flow",
+//        "flow",
+//        "flowOf",
+//        "asFlow",
+//        "callBackFlow",
+//        "channelFlow",
+//        "collectLatest",
+//        "flow toList",
+//        "flow toSet",
+//        "flow toCollection",
+//        "stateflow normal",
+//        "stateflow list",
+//        "stateflow",
+//        "shared Flow1",
+//        "shared Flow2",
+//        "shared Flow 连续注册多个",
+//        "shared Flow",
+        "test"
     )
     var dataList = mutableListOf<String>()
     var dataSet = mutableSetOf<String>()
@@ -66,21 +86,22 @@ class FlowFunctionActivity : AppCompatActivity() {
                 position: Int
             ) {
                 when (position) {
-                    0 -> flow1()
-                    1 -> flow2()
-                    2 -> flow3()
-                    3 -> flow4()
-                    4 -> flow5()
-                    5 -> flow6()
-                    6 -> flow7()
-                    7 -> flow8()
-                    8 -> flow9()
-                    9 -> stateflowNormal()
-                    10 -> flow11()
-                    11 -> stateflow()
-                    12 -> flow13()
-                    13 -> flow14()
-                    14 -> flow15()
+//                    0 -> flow1()
+//                    1 -> flow2()
+//                    2 -> flow3()
+//                    3 -> flow4()
+//                    4 -> flow5()
+//                    5 -> flow6()
+//                    6 -> flow7()
+//                    7 -> flow8()
+//                    8 -> flow9()
+//                    9 -> stateflowNormal()
+//                    10 -> flow11()
+//                    11 -> stateflow()
+//                    12 -> flow13()
+//                    13 -> flow14()
+//                    14 -> flow15()
+                    0->flow16()
                 }
             }
         })
@@ -92,8 +113,18 @@ class FlowFunctionActivity : AppCompatActivity() {
     fun init() {
         lifecycleScope.launch {
             flowModel.stateFlow1.collect { value ->
-                LogUtils.d("stateflow collect  : $value")
+//                LogUtils.d("stateflow collect  : $value")
                 flowFunctionDataBind?.flowText1?.text = value
+            }
+        }
+        lifecycleScope.launch {
+            flowModel.stateFlow3.collect { value ->
+                LogUtils.d("flow16  stateFlow3  : $value")
+            }
+        }
+        lifecycleScope.launch {
+            flowModel.stateFlow3Delay.collect { value ->
+                LogUtils.d("flow16  stateFlow3Delay  : $value")
             }
         }
     }
@@ -235,5 +266,12 @@ class FlowFunctionActivity : AppCompatActivity() {
                 LogUtils.d("flow15  collect2  : $value")
             }
         }
+
+    }
+    var time=0
+    fun flow16() {
+        var newTime=time++
+        flowModel.test1(newTime)
+        flowModel.delay1(newTime)
     }
 }

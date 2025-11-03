@@ -3,6 +3,7 @@ package com.example.module_home.ui.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.LogUtils
+import com.example.module_home.ui.data.DelayState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -31,6 +33,12 @@ class FlowViewModel : ViewModel() {
     var shareFlow=_shareFlow.asSharedFlow()
     var time = 0
     var maxIndex = 5
+
+    val _stateFlow3 = MutableStateFlow("stateFlow3初始化")
+    var stateFlow3 = _stateFlow3.asStateFlow()
+
+    val _stateFlow3Delay = MutableStateFlow(DelayState("stateFlow3Delay初始化"))
+    var stateFlow3Delay = _stateFlow3Delay.asStateFlow()
 
     fun getFlow1(): Flow<Int> {
         return flow {
@@ -141,6 +149,18 @@ class FlowViewModel : ViewModel() {
             _shareFlow.tryEmit("shareFlow update2 index : $time")
         }
     }
+    fun test1(time: Int) {
+        _stateFlow3.value = "第 $time 次发送"
+    }
+
+    fun delay1(time: Int) {
+        viewModelScope.launch {
+            delay(3000)
+//            _stateFlow3Delay.value = "发送成功"
+           // _stateFlow3Delay.update {"发送成功"  }
+            _stateFlow3Delay.value= DelayState("发送成功")
+        }
+    }
 
     private fun requestNet(block: (String) -> Unit) {
         viewModelScope.launch {
@@ -150,6 +170,5 @@ class FlowViewModel : ViewModel() {
                 block.invoke("网络加载结束")
             }
         }
-
     }
 }
