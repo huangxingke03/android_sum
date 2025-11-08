@@ -41,9 +41,9 @@ class CarCabinRenderer(private val context: Context) : GLSurfaceView.Renderer {
             .asFloatBuffer().apply { put(vertexData).position(0) }
 
     @DrawableRes
-    private var baseRes = R.drawable.car_cabin_base
+    private var baseRes = com.example.module_home.R.drawable.car_cabin_base
     @DrawableRes
-    private var maskRes = R.drawable.car_cabin_mask
+    private var maskRes = com.example.module_home.R.drawable.car_cabin_mask
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         //glClearColor(0f, 0f, 0f, 1f)
