@@ -3,6 +3,12 @@
 
     <application>
         <activity
+            android:name=".ui.test.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.lock.LockActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.compose.ComposeTestActivity"
             android:exported="false"
             android:label="@string/title_activity_compose_test"
