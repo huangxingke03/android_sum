@@ -25,8 +25,9 @@ ext {
                navigationFragment           : 'androidx.navigation:navigation-fragment:2.9.3',
                navigationFragmentKtx        : 'androidx.navigation:navigation-fragment-ktx:2.6.0',
                navigationUi                 : 'androidx.navigation:navigation-ui:2.9.3',
-               navigationUiKtx              : 'androidx.navigation:navigation-ui-ktx:2.6.0'
-
+               navigationUiKtx              : 'androidx.navigation:navigation-ui-ktx:2.6.0',
+               fragmentktx                  : 'androidx.fragment:fragment-ktx:1.8.0',
+               activityktx                  : 'androidx.activity:activity-ktx:1.9.0'
 
     ]
     sdkConfig = [

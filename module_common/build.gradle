@@ -75,4 +75,7 @@ dependencies {
     //路由
     api rootProject.ext.library.navigationFragmentKtx
     api rootProject.ext.library.navigationUiKtx
+
+    implementation rootProject.ext.library.fragmentktx
+    implementation rootProject.ext.library.activityktx
 }
