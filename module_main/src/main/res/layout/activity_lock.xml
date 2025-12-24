@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.lock.LockActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/lock_test1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="协成测试1"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/lock_test2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="协成测试2"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lock_test1" />
+        <Button
+            android:id="@+id/lock_test3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="协成测试3"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lock_test2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

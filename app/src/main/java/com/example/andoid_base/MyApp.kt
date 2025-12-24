@@ -4,8 +4,23 @@ import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.common.LogUtils
 import leakcanary.LeakCanary
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadFactory
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 class MyApp : Application() {
+    companion object{
+        // 全局线程池：IO 密集型
+        @JvmStatic
+        val IO_EXECUTOR by lazy {
+
+
+
+            
+        }
+
+    }
     override fun onCreate() {
         super.onCreate()
         leakCanaryConfig()
@@ -16,6 +31,8 @@ class MyApp : Application() {
         }
         ARouter.init(this)
     }
+
+    fun instance(): Application = this
 
     private fun leakCanaryConfig() {
         //App 处于前台时检测保留对象的阈值，默认是 5

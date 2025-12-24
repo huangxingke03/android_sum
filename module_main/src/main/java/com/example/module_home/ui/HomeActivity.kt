@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -18,6 +19,7 @@ import com.example.common.ui.base.ARouterActivity
 import com.example.module_home.R
 import com.example.module_home.databinding.ActivityHomeBinding
 import com.example.module_home.ui.vm.LiveDataViewModel
+import java.io.File
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -99,9 +101,11 @@ class HomeActivity : ARouterActivity() {
             }
         })
         homeBind.mainFunction.adapter = listAdapter
+//        listAdapter.submitList()
         homeBind.mainFunction.layoutManager = LinearLayoutManager(this)
         initData()
     }
+
     fun initData(){
         hashMap.put(null,"我是第一个")
         hashMap.put("第二个",null)

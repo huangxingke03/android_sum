@@ -32,6 +32,10 @@ object LogUtils {
     fun d(content: String) {
         Logger.d(content)
     }
+    @JvmStatic
+    fun logPrint(content: String) {
+        System.out.println("hxk_log-> $content")
+    }
 
     fun d(message: String, vararg args: Any) {
         Logger.d(message, * args)

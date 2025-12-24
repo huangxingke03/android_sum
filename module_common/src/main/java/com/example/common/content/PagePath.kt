@@ -32,5 +32,7 @@ object PagePath {
         const val LIVE_DATA_PAGE = "/main/module/liveData/page"
         const val BIND_TEST_PAGE = "/main/module/bindTest/page"
         const val COMPOSE_TEST_PAGE = "/main/module/composeTest/page"
+        const val LOCK_PAGE = "/main/module/lock/page"
+        const val TEST_PAGE = "/main/module/TEST/page"
     }
 }

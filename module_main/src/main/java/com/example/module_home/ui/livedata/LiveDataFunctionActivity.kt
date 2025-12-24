@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.common.LogUtils
 import com.example.common.adapter.ListAdapter
@@ -25,7 +26,8 @@ class LiveDataFunctionActivity : AppCompatActivity() {
         "复现数据倒灌",
         "flowOf",
         "asFlow",
-        "Livedata只发一次事件修复数据倒灌"
+        "Livedata只发一次事件修复数据倒灌",
+        "测试"
     )
     val liveDataViewModel by lazy {
         ViewModelProvider(this).get(LiveDataViewModel::class)
@@ -35,6 +37,9 @@ class LiveDataFunctionActivity : AppCompatActivity() {
     }
     val observer2 = Observer { data2: String ->
         LogUtils.d("livedata数据 修复数据倒灌只触发一次 data2 --->$data2")
+    }
+    val observer3 = Observer { data3: String ->
+        LogUtils.d("observer3 --->$data3")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +61,7 @@ class LiveDataFunctionActivity : AppCompatActivity() {
                 when (position) {
                     0 -> test1()
                     3 -> test2()
+                    4->test3()
                 }
             }
         })
@@ -69,6 +75,7 @@ class LiveDataFunctionActivity : AppCompatActivity() {
         liveDataViewModel.data1.removeObserver(observer1)
         liveDataViewModel.data1.observe(this, observer1)
         liveDataViewModel.data2.observe(this, observer2)
+        liveDataViewModel.data3.observe(this, observer3)
     }
 
     fun test1() {
@@ -77,5 +84,9 @@ class LiveDataFunctionActivity : AppCompatActivity() {
 
     fun test2() {
         liveDataViewModel.setDataValue2("更新数据->解决数据倒灌(事件只触发一次)")
+    }
+    fun test3() {
+        ARouter.getInstance().build(PagePath.ModuleMainPage.TEST_PAGE)
+            .navigation()
     }
 }
